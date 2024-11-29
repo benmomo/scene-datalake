@@ -1,0 +1,176 @@
+body {
+    font-family: "Raleway", sans-serif;
+    background-image: linear-gradient(180deg, rgba(20,22,23,0.59) 0%, rgba(20,22,23,0.59) 100%), url(https://thesceneproject.eu/wp-content/uploads/2023/05/cover.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+  }
+  
+  /* Reduce logo size and align it horizontally with the title */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 280px; /* Reduced size */
+  height: auto; /* Keep aspect ratio */
+  margin-right: 20px; /* Space between the logo and title */
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-container h2 {
+  font-size: 1.5rem; /* Adjust title font size */
+  font-weight: bold;
+  margin: 0;
+}
+  
+  .menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap; /* No queremos que se envuelvan para mantener el arco */
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+    margin-top: 20px;
+    perspective: 1000px; /* Añadir perspectiva para el efecto 3D */
+  }
+  
+  .menu-item {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    transform-style: preserve-3d;
+    margin-bottom: 10px; /* Adding bottom margin to create space between rows */
+  }
+  
+  /* Aplicar rotación a cada ítem para simular el arco, con ángulos ajustados para menos curvatura */
+  .menu-item:nth-child(1) {
+    transform: rotateY(-15deg) translateZ(80px); /* Ángulo reducido para un efecto más sutil */
+  }
+  
+  .menu-item:nth-child(2) {
+    transform: rotateY(-10deg) translateZ(90px); /* Ángulo reducido */
+  }
+  
+  .menu-item:nth-child(3) {
+    transform: rotateY(0deg) translateZ(100px); /* Ítem central más adelante */
+  }
+  
+  .menu-item:nth-child(4) {
+    transform: rotateY(10deg) translateZ(90px); /* Ángulo reducido */
+  }
+  
+  .menu-item:nth-child(5) {
+    transform: rotateY(15deg) translateZ(80px); /* Ángulo reducido para un efecto más sutil */
+  }
+  
+  .icon {
+    width: 80px;
+    height: 80px;
+    background-color: #d4bff9; /* Violeta más claro como nuevo color de fondo */
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px rgba(212, 191, 249, 0.4); /* Ajustar sombra para combinar mejor con el nuevo color */
+    transition: all 0.3s ease-in-out;
+    opacity: 0.7; /* Aplicar 70% de transparencia para mezclar el ícono con el color de fondo */
+  }
+  
+  #ontologyViewer .icon {
+    background-image: url('img/ont2.png');
+  }
+  
+  #dataLakeUI .icon {
+    background-image: url('img/minio.png');
+  }
+  
+  #codeRepository .icon {
+    background-image: url('img/github2.png');
+  }
+  
+  #documentation .icon {
+    background-image: url('img/doc2.png');
+  }
+  
+  #dataIngestion .icon {
+    background-image: url('img/dataIngestion2.png');
+  }
+
+  #nifi .icon {
+    background-image: url('img/nifi.png');
+  }
+
+  #mongo .icon {
+    background-image: url('img/mongo.png');
+  }
+
+  #nodered .icon {
+    background-image: url('img/nodered.png');
+  }
+
+  #trino .icon {
+    background-image: url('img/trino.png');
+  }
+
+  #jupyter .icon {
+    background-image: url('img/jupyter.png');
+  }
+
+  #ot .icon {
+    background-image: url('img/ot.png');
+  }
+
+  #keycloak .icon {
+    background-image: url('img/keycloak2.png');
+  }
+  
+  .menu-item:hover .icon {
+    background-color: #e6d4ff; /* Violeta aún más claro al pasar el ratón */
+    box-shadow: 0 0 30px 10px rgba(212, 191, 249, 0.6);
+    transform: scale(1.05);
+    opacity: 1; /* Al pasar el ratón, el ícono tiene el 100% de opacidad para destacar */
+  }
+  
+  .text {
+    font-size: 1rem;
+    color: #fff;
+    margin-top: 12px;
+  }
+  
+  .footer {
+    background-color: #000;
+    background-image: linear-gradient(to bottom, #141032, #141032);
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  } 
+  
+  

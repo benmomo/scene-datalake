@@ -1,0 +1,130 @@
+[
+    {
+        "id": "de3aa2238c88f5bb",
+        "type": "tab",
+        "label": "Dummy flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2597dbabc5284d9d",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c3378cee521836ab",
+        "type": "debug",
+        "z": "de3aa2238c88f5bb",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "84d3949f584db1f0",
+        "type": "inject",
+        "z": "de3aa2238c88f5bb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "b5eee863b789d825"
+            ]
+        ]
+    },
+    {
+        "id": "b5eee863b789d825",
+        "type": "function",
+        "z": "de3aa2238c88f5bb",
+        "name": "function 1",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toString();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "c3378cee521836ab"
+            ]
+        ]
+    },
+    {
+        "id": "fd127339d5a717f8",
+        "type": "http in",
+        "z": "2597dbabc5284d9d",
+        "name": "test-minio",
+        "url": "/test-minio",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "16e5ad63b8b6f979",
+                "26885c87c580983b"
+            ]
+        ]
+    },
+    {
+        "id": "16e5ad63b8b6f979",
+        "type": "debug",
+        "z": "2597dbabc5284d9d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "26885c87c580983b",
+        "type": "http response",
+        "z": "2597dbabc5284d9d",
+        "name": "response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 600,
+        "y": 220,
+        "wires": []
+    }
+]

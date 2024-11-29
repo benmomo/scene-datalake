@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SCENE-O - Home</title>
+  
+  <link rel="shortcut icon" href="https://thesceneproject.eu/wp-content/uploads/2023/05/Scene-fav64.png" type="image/x-icon">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway:200'>
+  <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+  <div class="logo-title-container">
+    <div class="logo-container">
+      <img src="scene_logo2.png" class="logo"/>
+    </div>
+    <div class="title-container">
+      <h2>
+        <b>DataLake Control Panel</b>
+      </h2>
+    </div>
+  </div>
+
+  <!-- Main menu -->
+  <div class="menu-container">
+    <div class="menu-item" id="ontologyViewer" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Ontology Viewer</div>
+    </div>
+    <div class="menu-item" id="dataLakeUI" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">DataLake UI</div>
+    </div>
+    <div class="menu-item" id="codeRepository" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Code repository</div>
+    </div>
+    <div class="menu-item" id="documentation" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Documentation</div>
+    </div>
+    <div class="menu-item" id="keycloak" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">IdP</div>
+    </div>
+    
+  </div>
+
+  <div class="menu-container">
+    
+    <div class="menu-item" id="nifi" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Data Ingestion</div>
+    </div>  
+    <div class="menu-item" id="nodered" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Data Flows</div>
+    </div>  
+    <div class="menu-item" id="trino" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">SQL DB</div>
+    </div>
+    <div class="menu-item" id="mongo" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">NoSQL DB</div>
+    </div>
+    <div class="menu-item" id="jupyter" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">Examples</div>
+    </div>   
+    <!-- 
+    <div class="menu-item" id="ot" tabindex="0">
+      <div class="icon"></div>
+      <div class="text">OT API</div>
+    </div>    
+    -->
+  </div>
+
+  <!-- Info display -->
+  <div class="footer">
+    <p>
+      You can access through this website the <a href="http://scene.local/ontology/scene.ttl" target="_blank" style="color:#d4bff9;text-decoration:nones" >SCENE ontology</a> , 
+      <a href="https://s3ui.scene.local/" target="_blank" style="color:#d4bff9;text-decoration:nones" >Data Lake</a>, and associated documentation, code, APIs and test examples. 
+      For more general information you can access SCENE's <a href="https://thesceneproject.eu/" target="_blank" style="color:#d4bff9;text-decoration:nones">project website</a>
+    </p>  
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('ontologyViewer').addEventListener('click', function() {
+        window.open('https://webvowl.scene.local/', '_blank');
+      });
+      document.getElementById('dataLakeUI').addEventListener('click', function() {
+        window.open('https://s3ui.scene.local/', '_blank');
+      });
+      document.getElementById('codeRepository').addEventListener('click', function() {
+        window.open('https://github.com/benmomo/scene-ontology', '_blank');
+      });
+      document.getElementById('documentation').addEventListener('click', function() {
+        window.open('https://scene-ontology-doc.readthedocs.io/en/latest/', '_blank');
+      });
+      document.getElementById('keycloak').addEventListener('click', function() {
+        window.open('https://keycloak.scene.local/', '_blank');
+      });
+      document.getElementById('nifi').addEventListener('click', function() {
+        window.open('https://nifi.scene.local/', '_blank');
+      });
+      document.getElementById('mongo').addEventListener('click', function() {
+        window.open('https://mongoui.scene.local/', '_blank');
+      });
+      document.getElementById('nodered').addEventListener('click', function() {
+        window.open('https://nodered.scene.local/', '_blank');
+      });
+      document.getElementById('trino').addEventListener('click', function() {
+        window.open('https://trinoui.scene.local/', '_blank');
+      });
+      document.getElementById('jupyter').addEventListener('click', function() {
+        window.open('https://jupyter.scene.local/', '_blank');
+      });
+      
+    });
+  </script>
+
+</body>
+</html>

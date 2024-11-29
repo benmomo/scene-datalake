@@ -1,0 +1,18 @@
+/* Hide 'Log In' button */
+.login-container {
+    display: none !important;
+}
+
+/* Hide 'Anonymous user' */
+.user-name-container {
+    display: none !important;
+}
+
+.login-link-container {
+    display: none !important;
+}
+
+
+.current-user-container {
+    display: none !important;
+}

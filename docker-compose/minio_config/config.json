@@ -1,0 +1,14 @@
+{
+  "logger": {
+    "console": {
+      "enable": true,
+      "level": "info"
+    }
+  },
+  "webhook": {
+    "1": {
+      "enable": true,
+      "endpoint": "https://nodered.scene.local/test-minio"
+    }
+  }
+}
