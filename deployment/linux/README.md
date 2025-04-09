@@ -1,6 +1,6 @@
 # 🐳 SCENE Datalake - Local Deployment (Windows)
 
-This guide explains how to deploy the SCENE platform locally on a **Windows machine** using Docker Desktop.  
+This guide explains how to deploy the SCENE platform locally on a **Linux machine** using Docker Desktop.  
 It is designed for **testing and development purposes**, simulating the production setup via `localhost` and self-signed certificates.
 
 
@@ -11,7 +11,7 @@ This folder contains everything needed to run the SCENE tools locally:
 ```
 scene-datalake/
 └── deployment/
-    └── windows/
+    └── linux/
         ├── docker-compose.yml  # Main configuration to launch all services
         ├── default.conf        # NGINX reverse proxy configuratio
         ├── scene.env           # Environment variables for service passwords
@@ -23,9 +23,9 @@ scene-datalake/
 
 ## 🧰 Prerequisites
 
-- You must have **Docker Desktop for Windows** installed.
-- You must run your terminal or editor **as Administrator** to modify the hosts file and create certificates.
-- Git or ZIP download access.
+- Docker Engine and Docker Compose must be installed.
+- You need **sudo privileges** to edit `/etc/hosts` and generate SSL certificates.
+- Basic Git and Bash knowledge is assumed.
 
 
 
@@ -34,12 +34,12 @@ scene-datalake/
 ### 1. Clone or Download
 ```
 git clone https://github.com/benmomo/scene-datalake.git
-cd scene-datalake/deployment/local/windows
+cd scene-datalake/deployment/linux
 ```
 
-### 2. Configure Local Domains in `hosts` File
+### 2. Configure Local Domains in `/etc/hosts` File
 
-To simulate the domain-based access (as in production), we map local domains like `scene.local` to your own machine (`localhost`).
+To simulate domain-based access, we map *.scene.local domains to 127.0.0.1.
 
 This allows you to use URLs such as:
 
@@ -49,18 +49,16 @@ This allows you to use URLs such as:
 - and others...
 
 
-#### 📝 Steps to Edit the `hosts` File (Windows)
+#### 📝 Steps to Edit the `/etc/hosts` File (Linux)
 
-1. **Open Notepad as Administrator**:
-   - Press `Start`, type `Notepad`, right-click it, and choose **Run as administrator**.
+1. **Edit the File as Admin**:
 
-2. **Open the hosts file**:
-   - In Notepad, go to `File → Open`
-   - Navigate to:  
-     `C:\Windows\System32\drivers\etc`
-   - Select `All Files (*.*)` and open the `hosts` file.
+```   
+$ sudo nano /etc/hosts
+```
 
-3. **Add the following lines at the bottom**:
+
+2. **Add the following lines**:
 
 ```
 127.0.0.1 scene.local 
@@ -73,9 +71,9 @@ This allows you to use URLs such as:
 127.0.0.1 webvowl.scene.local
 ```
 
-4. **Save the file** and close Notepad.
+3. **Save the file** and close it.
 
-> ⚠️ You may need to restart Docker Desktop or your browser to apply the changes.
+
 
 
 ### 3. Generate Self-Signed SSL Certificates
@@ -87,20 +85,20 @@ These certificates will be used by the NGINX reverse proxy and other services.
 
 #### 📁 Where to Place the Certificates
 
-You should create a folder named `certs` inside `deployment/local/windows/`, like this:
+You should create a folder named `certs` inside `deployment/linux/`, like this:
 
 ```
 scene-datalake/
 └── deployment/
-    └── windows/
+    └── linux/
         ├── certs
-        ├── fullchain1.pem
-        ├── privkey1.pem
+            ├── fullchain1.pem
+            ├── privkey1.pem
 ```
 
-#### 🛠️ Steps to Create the Certificates (Using Git Bash or WSL)
+#### 🛠️ Steps to Create the Certificates (Using Bash)
 
-If you're using Git Bash, WSL, or any terminal with OpenSSL:
+Open a bash terminal (we assume OpenSSL has been already installed):
 
 ```
 mkdir -p certs
@@ -109,8 +107,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -out certs/fullchain1.pem \
   -subj "/C=EU/ST=Valencia/L=UPV/O=SCENE/CN=*.scene.local"
 ```
-
-⚠️ If you're using PowerShell, OpenSSL must be installed and accessible via PATH.
 
 
 ✅ Result
@@ -159,6 +155,7 @@ TRINO_PASSWORD=scene1234
 
 🔐 You can modify these values to suit your local needs before launching the platform.
 
+
 📌 Notes
 
 - Docker Compose will substitute these variables automatically when starting containers.
@@ -172,7 +169,7 @@ Once your environment is ready (hosts file, certificates, `.env` file), you're r
 
 #### ▶️ Start Everything with Docker Compose
 
-Open a terminal in the `deployment/local/windows/` folder and run the following command:
+Open a terminal in the `deployment/linux/` folder and run the following command:
 
 ```
 docker-compose up -d
@@ -208,13 +205,18 @@ This is the main front-end from which you will access the other endpoints of the
 > ⚠️ Because you're using self-signed certificates, your browser will show a warning.  
 > Click “Advanced” → “Proceed to [domain]” to bypass it.
 
-For some services, e.g., Keycloak, you might need a valid certificate (not self-signed). To avoid this, you might remove the HSTS profile in your browser. In Chrome it will be:
-- Visit **chrome://net-internals/#hsts**
-- In **Delete domain security policies** insert the domain (here *keycloak.scene.local*). Then Click on **Delete**
+🌐 **Troubleshooting Browser HSTS**
+If your browser blocks access to self-signed sites (like Keycloak):
 
-In Firefox just type **about:config**, search **hsts** and delete the HSTS cache
+**Chrome**:
 
-For other services, such as Jupyter providing examples, there might be some problems loading the theme in the **Chrome browser**. If this happens, just try **Firefox** for this particular service
+- Go to *chrome://net-internals/#hsts*
+- Enter the domain under “Delete domain security policies” → Click Delete
+
+**Firefox**:
+
+- Visit *about:config*
+- Search for HSTS settings and clear the cache
 
 #### 🛑 To Stop the Platform
 
@@ -233,7 +235,7 @@ To stop (pause) the containers without deleting them:
 
 ### 🎉 Done!
 
-You’ve now successfully deployed the SCENE Data Lake platform locally for testing and development on Windows.
+You’ve now successfully deployed the SCENE Data Lake platform locally for testing and development on Linux.
 
 
 

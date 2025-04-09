@@ -1,0 +1,155 @@
+version: '3.8'
+
+services:
+
+  nginx:    
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./frontend-ui-files/html:/usr/share/nginx/html 
+      - ./frontend-ui-files/css:/usr/share/nginx/html/css 
+      - ./frontend-ui-files/conf/default.conf:/etc/nginx/conf.d/default.conf       
+      
+      - ./certs/fullchain1.pem:/etc/ssl/certs/fullchain1.pem
+      - ./certs/privkey1.pem:/etc/ssl/certs/privkey1.pem     
+      - ./frontend-ui-files/auth/nifi.htpasswd:/etc/nginx/auth/nifi.htpasswd  # password file
+    ports:
+       - "80:80"  
+       - "443:443"             
+    networks:
+        - scene   
+
+   
+
+  minio:
+    container_name: minio    
+    image: minio/minio    
+    
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    
+    volumes:
+      - ./minio_data:/data   
+    
+    env_file:
+      - scene.env
+    environment:     
+      - MINIO_DOMAIN=s3api.scene.local 
+      - MINIO_SERVER_URL=https://s3api.scene.local        
+      - MINIO_BROWSER_REDIRECT_URL=https://s3ui.scene.local       
+      
+    command: server --console-address ":9001" /data
+    networks:
+        - scene     
+
+
+
+  webvowl:    
+    image: benmomo/scene-webvowl:latest
+    container_name: webvowl  
+    ports:
+       - "8080:8080"                   
+    
+    networks:
+        - scene   
+    
+    
+  jupyter:
+    image: jupyter/minimal-notebook:latest
+    container_name: jupyter
+    ports:
+      - "8888:8888"  
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      # Folder to store notbeooks
+      - ./jupyter_data/notebooks:/home/jovyan/work  
+      # SSL certificate
+      - ./certs/fullchain1.pem:/etc/ssl/certs/fullchain1.pem
+      - ./certs/privkey1.pem:/etc/ssl/certs/privkey1.pem
+    networks:
+      - scene
+    command: >
+      start-notebook.sh --NotebookApp.token=''  # Elimina el token para simplificar el acceso en local
+    user: root  # Allows to install packages in the container 
+    entrypoint: >
+      /bin/bash -c "pip install minio && start-notebook.sh --NotebookApp.token=''"
+    
+
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: nodered
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - "1880:1880"      
+    networks:
+        - scene  
+
+
+  keycloak:    
+    image: quay.io/keycloak/keycloak
+    container_name: keycloak
+    
+    env_file:
+      - scene.env
+    environment:           
+      - KC_HOSTNAME=keycloak.scene.local  
+    command: >
+      start-dev       
+      --proxy-headers=xforwarded    
+      
+    ports:
+      - 8081:8080   # HTTP      
+    
+    networks:
+      - scene
+    #volumes:
+    #  - ./keycloak_data:/opt/keycloak/data 
+
+   
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino
+    ports:
+      - "8082:8080"   # Trino UI
+    environment:
+      - TRINO_LOG_LEVEL=INFO   
+    networks:
+      - scene
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    restart: always    
+    env_file:
+      - scene.env
+    ports:
+        - 27017:27017    
+    networks:
+        - scene  
+
+
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    #ports:
+    #  - "8081:8081"
+    env_file:
+      - scene.env
+    environment:      
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH=true
+      
+    networks:
+        - scene  
+
+
+networks:
+  scene:
+    # Use a custom driver
+    #driver: custom-driver-1
