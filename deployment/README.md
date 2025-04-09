@@ -30,7 +30,7 @@ Includes Linux-specific steps for configuring `/etc/hosts`, generating SSL certi
 `deployment/linux/`
 
 📘 Setup Guide:  
-Please check README file in this previousfolder
+Please check README file in this previous folder
 
 
 
