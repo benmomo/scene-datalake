@@ -1,4 +1,4 @@
-# 🐳 SCENE Datalake - Local Deployment (Windows)
+# 🐳 SCENE Datalake - Local Deployment (Linux)
 
 This guide explains how to deploy the SCENE platform locally on a **Linux machine** using Docker Desktop.  
 It is designed for **testing and development purposes**, simulating the production setup via `localhost` and self-signed certificates.
