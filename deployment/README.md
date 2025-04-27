@@ -34,10 +34,10 @@ Please check README file in this previous folder
 
 
 
-### 🚧 3. Production Server Deployment (Coming Soon)
+### 🚧 3. Production Server Deployment 
 
-We are preparing a dedicated deployment pipeline for secure **production environments**.  
-This will include:
+We have prepared a dedicated deployment pipeline for secure **production environments**.  
+This includes:
 
 - Hardened configurations
 - TLS certificates from a trusted CA
