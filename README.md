@@ -1,36 +1,76 @@
-SCENE Datalake 
-===
+# SCENE Datalake 🎽🌊
 
-Data Lake  developed inside the [SCENE project](https://thesceneproject.eu/). 
-SCENE has been financed by the Horizon Europe programme under Grant Agreement No 101095303
+Data Lake developed inside the [SCENE project](https://thesceneproject.eu/).  
+SCENE is funded by the Horizon Europe Programme under Grant Agreement No. **101095303**.
 
-The data lake also includes the SCENE ontology,  covering knowledge areas from the film-making industry.
+The Data Lake includes the **SCENE Ontology**, covering knowledge areas from the film-making industry.
+
+---
+
+## 📚 Usage and Documentation
+
+The SCENE Data Lake provides a **set of tools** including:
+- Visual viewer for the ontology (WebVOWL)
+- REST APIs for accessing the data lake
+- Authentication and access management
+- Data ingestion workflows
+
+These tools are packaged as **Docker containers** and are publicly available on **DockerHub**.
+
+You can deploy the SCENE Data Lake via **Docker Compose** by browsing the `deployment` folder.  
+There are three installation options available:
+- 🖥️ **Local installation on Windows**
+- 🐧 **Local installation on Linux**
+- 🌐 **Production deployment on a Linux server**
+
+Each approach has its own **dedicated installation guide** available inside the corresponding subfolder.
+
+📖 **Additional documentation** (User Manuals, Admin Manuals, FAQs, etc.) is available at:  
+👉 [SCENE Data Lake Documentation on ReadTheDocs](https://scene-datalake-doc.readthedocs.io/en/latest/)
+
+---
+
+## ⚙️ WebVOWL: Optional Local Build
+
+Although WebVOWL is provided as a Docker image, you can optionally **build your own version** (e.g., to customize the CSS, change ontology files):
+
+```bash
+docker build -t webvowl .
+```
+
+You will find the Dockerfile under the `docker-build/webvowl` folder.
+
+---
+
+## ⚡ Important Notes
+
+- There is an **old version** of the platform under the `old/` folder. It is kept **only for historical reasons**.
+- The old version requires manual edits to configuration files (`docker-compose.yml`, `default.conf`, etc.) — not recommended for production use.
 
 
+---
 
+## 🛡️ License
 
-Usage and Documentation
-===
+The SCENE Ontology and associated tools are distributed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
 
-The data lake provides a **set of tools** including a visual viewer, REST APIs for the associated data lakes, etc. 
-They use Docker containers and are publicly available in DockerHub, except for Webvowl that yous should build, available in the **docker-build** folder:
-$ docker build -t webvowl .
+⚠️ Some third-party services integrated into the Data Lake (e.g., MinIO, Apache NiFi, Node-RED) have their **own licenses**.  
+Please refer to their official sites for further details — all components used are open-source.
 
-The **docker-compose** folder includes a docker-compose file that shows a basic usage of the whole set. You might test it in your own computer after setting up local configurations, including domains, valid SSL certificates, credentials, etc. Note that the provided docker-compose file serves as a template. You **must configure** it before being able to run it. Please edit it and check for any comment beginning with **SCENE**. As there is a proxy (nginx) you should also check the file located in the folder **frontend-ui-files/conf/default.conf**, and look for any comment beginning with **SCENE** 
+---
 
-The given docker-compose file is basic and could be improved for production environments (e.g., use of Kubernetes instead of docker-compose)
+## 📬 Contact
 
+- **Benjamin Molina** — [benmomo@upvnet.upv.es](mailto:benmomo@upvnet.upv.es)
 
-It is expected that more documentation will be available in the [Readthedocs](https://scene-datalake-doc.readthedocs.io/en/latest/) website, including a user manual. We will also try to automatize the installation process. 
+---
 
+# 🔗 Quick Links
 
-License
-===
+- 🐙 GitHub Repository: https://github.com/benmomo/scene-datalake
+- 📖 Documentation: https://scene-datalake-doc.readthedocs.io/en/latest/
+- 🎬 SCENE Project Website: https://thesceneproject.eu/
 
-The SCENE ontology and the set of tools are distributed through [Apache2](https://www.apache.org/licenses/LICENSE-2.0) license.
+---
 
-
-Contacts
-===
-
-Benjamin Molina <benmomo@upvnet.upv.es>
+👉 **This deployment assumes a single-server architecture.** For higher security, availability, or scaling, consider using advanced setups (Kubernetes, load balancers, database clustering).
