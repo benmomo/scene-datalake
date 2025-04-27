@@ -1,0 +1,266 @@
+@prefix : <http://example.org/filmontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Ontology Metadata
+:FilmOntology rdf:type owl:Ontology ;
+    rdfs:label "Film Making Ontology" ;
+    rdfs:comment "An ontology combining COMM, OMC, OntoFilm, and other related ontologies for film-making." .
+
+# Classes
+:CreativeWork rdf:type owl:Class ;
+    rdfs:label "Creative Work" ;
+    rdfs:comment "A general class for any creative work, such as a film, book, or game." .
+
+:Person rdf:type owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "A class representing a person involved in the film-making process." .
+
+:Location rdf:type owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "A class representing a location used in film-making." .
+
+:Metadata rdf:type owl:Class ;
+    rdfs:label "Metadata" ;
+    rdfs:comment "A class for metadata related to creative works." .
+
+:Event rdf:type owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "A class for events related to film-making, such as broadcasts or screenings." .
+
+:Project rdf:type owl:Class ;
+    rdfs:label "Project" ;
+    rdfs:comment "A class for projects in the film-making process." .
+
+:Organization rdf:type owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:comment "A class representing an organization involved in film-making." .
+
+:Document rdf:type owl:Class ;
+    rdfs:label "Document" ;
+    rdfs:comment "A class for documents related to film-making." .
+
+# Subclasses
+:Film rdf:type owl:Class ;
+    rdfs:subClassOf :CreativeWork ;
+    rdfs:label "Film" ;
+    rdfs:comment "A class representing a film." .
+
+:Scene rdf:type owl:Class ;
+    rdfs:subClassOf :Project ;
+    rdfs:label "Scene" ;
+    rdfs:comment "A class representing a scene in a film." .
+
+:Shot rdf:type owl:Class ;
+    rdfs:subClassOf :Project ;
+    rdfs:label "Shot" ;
+    rdfs:comment "A class representing a shot in a scene." .
+
+:Actor rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "Actor" ;
+    rdfs:comment "A class representing an actor in a film." .
+
+:Director rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "Director" ;
+    rdfs:comment "A class representing a director of a film." .
+
+:Crew rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "Crew" ;
+    rdfs:comment "A class representing a crew member in a film." .
+
+:VideoFile rdf:type owl:Class ;
+    rdfs:subClassOf :CreativeWork ;
+    rdfs:label "Video File" ;
+    rdfs:comment "A class representing a video file." .
+
+:TechnicalSpecification rdf:type owl:Class ;
+    rdfs:subClassOf :Metadata ;
+    rdfs:label "Technical Specification" ;
+    rdfs:comment "A class for technical specifications of media files." .
+
+:Programme rdf:type owl:Class ;
+    rdfs:subClassOf :CreativeWork ;
+    rdfs:label "Programme" ;
+    rdfs:comment "A class representing a programme, such as a TV show or series." .
+
+:Series rdf:type owl:Class ;
+    rdfs:subClassOf :Programme ;
+    rdfs:label "Series" ;
+    rdfs:comment "A class representing a series of programmes." .
+
+:Episode rdf:type owl:Class ;
+    rdfs:subClassOf :Project ;
+    rdfs:label "Episode" ;
+    rdfs:comment "A class representing an episode in a series." .
+
+:Broadcast rdf:type owl:Class ;
+    rdfs:subClassOf :Event ;
+    rdfs:label "Broadcast" ;
+    rdfs:comment "A class representing a broadcast event." .
+
+:MediaResource rdf:type owl:Class ;
+    rdfs:subClassOf :CreativeWork ;
+    rdfs:label "Media Resource" ;
+    rdfs:comment "A class representing a media resource." .
+
+:Format rdf:type owl:Class ;
+    rdfs:subClassOf :Metadata ;
+    rdfs:label "Format" ;
+    rdfs:comment "A class for the format of media resources." .
+
+:Rights rdf:type owl:Class ;
+    rdfs:subClassOf :Metadata ;
+    rdfs:label "Rights" ;
+    rdfs:comment "A class for rights information related to media resources." .
+
+:Game rdf:type owl:Class ;
+    rdfs:subClassOf :CreativeWork ;
+    rdfs:label "Game" ;
+    rdfs:comment "A class representing a video game." .
+
+:Character rdf:type owl:Class ;
+    rdfs:subClassOf :Project ;
+    rdfs:label "Character" ;
+    rdfs:comment "A class representing a character in a game or film." .
+
+:3DModel rdf:type owl:Class ;
+    rdfs:subClassOf :Asset ;
+    rdfs:label "3D Model" ;
+    rdfs:comment "A class representing a 3D model used in film or game production." .
+
+# Properties
+:hasAnnotation rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Annotation ;
+    rdfs:label "has annotation" ;
+    rdfs:comment "Links a creative work to its annotation." .
+
+:hasPerson rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Person ;
+    rdfs:label "has person" ;
+    rdfs:comment "Links a creative work to a person involved." .
+
+:hasFormat rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Format ;
+    rdfs:label "has format" ;
+    rdfs:comment "Links a creative work to its format." .
+
+:hasMetadata rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Metadata ;
+    rdfs:label "has metadata" ;
+    rdfs:comment "Links a creative work to its metadata." .
+
+:hasTechnicalSpecification rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :TechnicalSpecification ;
+    rdfs:label "has technical specification" ;
+    rdfs:comment "Links a creative work to its technical specification." .
+
+:hasTask rdf:type owl:ObjectProperty ;
+    rdfs:domain :MediaCreation ;
+    rdfs:range :Task ;
+    rdfs:label "has task" ;
+    rdfs:comment "Links a media creation process to its task." .
+
+:hasRole rdf:type owl:ObjectProperty ;
+    rdfs:domain :MediaCreation ;
+    rdfs:range :Role ;
+    rdfs:label "has role" ;
+    rdfs:comment "Links a media creation process to its role." .
+
+:involvesAsset rdf:type owl:ObjectProperty ;
+    rdfs:domain :Task ;
+    rdfs:range :Asset ;
+    rdfs:label "involves asset" ;
+    rdfs:comment "Links a task to an asset involved in it." .
+
+:hasScene rdf:type owl:ObjectProperty ;
+    rdfs:domain :Film ;
+    rdfs:range :Scene ;
+    rdfs:label "has scene" ;
+    rdfs:comment "Links a film to its scenes." .
+
+:hasShot rdf:type owl:ObjectProperty ;
+    rdfs:domain :Scene ;
+    rdfs:range :Shot ;
+    rdfs:label "has shot" ;
+    rdfs:comment "Links a scene to its shots." .
+
+:directedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :Film ;
+    rdfs:range :Director ;
+    rdfs:label "directed by" ;
+    rdfs:comment "Links a film to its director." .
+
+:hasActor rdf:type owl:ObjectProperty ;
+    rdfs:domain :Scene ;
+    rdfs:range :Actor ;
+    rdfs:label "has actor" ;
+    rdfs:comment "Links a scene to its actors." .
+
+:hasLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :Scene ;
+    rdfs:range :Location ;
+    rdfs:label "has location" ;
+    rdfs:comment "Links a scene to its location." .
+
+:partOfSeries rdf:type owl:ObjectProperty ;
+    rdfs:domain :Programme ;
+    rdfs:range :Series ;
+    rdfs:label "part of series" ;
+    rdfs:comment "Links a programme to a series it is part of." .
+
+:hasEpisode rdf:type owl:ObjectProperty ;
+    rdfs:domain :Series ;
+    rdfs:range :Episode ;
+    rdfs:label "has episode" ;
+    rdfs:comment "Links a series to its episodes." .
+
+:broadcastOn rdf:type owl:ObjectProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range :Broadcast ;
+    rdfs:label "broadcast on" ;
+    rdfs:comment "Links an episode to its broadcast event." .
+
+:producedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range :Person ;
+    rdfs:label "produced by" ;
+    rdfs:comment "Links an episode to its producer." .
+
+:about rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Subject ;
+    rdfs:label "about" ;
+    rdfs:comment "Links a creative work to its subject." .
+
+:creator rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Person ;
+    rdfs:label "creator" ;
+    rdfs:comment "Links a creative work to its creator." .
+
+:contentLocation rdf:type owl:ObjectProperty ;
+    rdfs:domain :MediaObject ;
+    rdfs:range :Place ;
+    rdfs:label "content location" ;
+    rdfs:comment "Links a media object to its content location." .
+
+:duration rdf:type owl:ObjectProperty ;
+    rdfs:domain :MediaObject ;
+    rdfs:range :Duration ;
+    rdfs:label "duration" ;
+    rdfs:comment "Links a media object to its duration." .
+
+:datePublished rdf:type owl:ObjectProperty ;
+    rdfs:domain :CreativeWork ;
+    rdfs:range :Date ;
+    rdfs:label "date published" ;
+    rdfs:comment "Links a creative work to its publication date." .

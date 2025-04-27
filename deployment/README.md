@@ -45,9 +45,10 @@ This will include:
 - External storage and user authentication integration
 
 📂 Future Folder:  
-`deployment/server/`
+`deployment/production/`
 
-📅 Status: *Planned*
+📘 Setup Guide:  
+Please check README file in this previous folder
 
 
 
